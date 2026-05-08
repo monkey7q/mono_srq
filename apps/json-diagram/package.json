@@ -1,0 +1,20 @@
+{
+  "name": "@repo/json-diagram",
+  "version": "1.0.0",
+  "description": "Minimal JSON diagram MVP app.",
+  "main": "src/index.js",
+  "private": true,
+  "scripts": {
+    "dev": "node src/dev.js",
+    "build": "node src/build.js",
+    "typecheck": "node --test",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@repo/shared": "workspace:*"
+  },
+  "keywords": [],
+  "author": "ruiqi song",
+  "license": "ISC",
+  "packageManager": "pnpm@10.23.0"
+}

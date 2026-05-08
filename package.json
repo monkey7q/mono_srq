@@ -1,0 +1,16 @@
+{
+  "name": "mono_srq",
+  "version": "1.0.0",
+  "description": "Monorepo for the JSON diagram MVP.",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter @repo/json-diagram dev",
+    "build": "pnpm --filter @repo/json-diagram build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test"
+  },
+  "keywords": [],
+  "author": "ruiqi song",
+  "license": "ISC",
+  "packageManager": "pnpm@10.23.0"
+}
