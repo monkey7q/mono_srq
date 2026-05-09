@@ -1,14 +1,14 @@
 "use strict";
-//以下四个函数分别对应mvp的四个主流程
+
 const {
   listPresets,
   normalizeDiagram,
   validatePromptInput,
 } = require("@repo/shared");
-const { generateDiagramDraft } = require("./mock-llm");
+const { generateDiagramDraftWithModel, getProviderConfig } = require("./model-client");
 const { buildGenerationPrompt } = require("./prompt-builder");
 
-function runPipeline(input) {
+async function runPipeline(input) {
   const inputValidation = validatePromptInput(input);
   if (!inputValidation.ok) {
     return {
@@ -18,7 +18,20 @@ function runPipeline(input) {
     };
   }
 
-  const draft = generateDiagramDraft(inputValidation.value);
+  const provider = getProviderConfig();
+  let draft;
+
+  try {
+    draft = await generateDiagramDraftWithModel(inputValidation.value);
+  } catch (error) {
+    return {
+      ok: false,
+      stage: "model",
+      errors: [error.message],
+      provider,
+    };
+  }
+
   const diagramValidation = normalizeDiagram(draft);
   if (!diagramValidation.ok) {
     return {
@@ -26,6 +39,7 @@ function runPipeline(input) {
       stage: "diagram",
       errors: diagramValidation.errors,
       draft,
+      provider,
     };
   }
 
@@ -35,6 +49,7 @@ function runPipeline(input) {
     diagram: diagramValidation.value,
     generationPrompt: buildGenerationPrompt(diagramValidation.value),
     presets: listPresets(),
+    provider,
   };
 }
 

@@ -13,7 +13,8 @@ Run a minimal, reliable chain from natural language input to a normalized diagra
    - Reject unsupported diagram types or presets
 3. JSON draft generation
    - Convert the prompt into a draft diagram JSON
-   - The current implementation uses a local mock generator to keep the MVP deterministic
+   - Always call DeepSeek when a key is configured
+   - Return a model-stage error when the key is missing or the response is malformed
 4. Schema validation and normalization
    - Enforce required top-level fields
    - Normalize text and fill defaults
@@ -30,5 +31,5 @@ Run a minimal, reliable chain from natural language input to a normalized diagra
 ## Current Scope
 - One diagram type: `layered_architecture`
 - Two presets: `enterprise_blueprint`, `minimal_wireframe`
-- No remote API call yet
+- Supports DeepSeek only
 - No version management yet

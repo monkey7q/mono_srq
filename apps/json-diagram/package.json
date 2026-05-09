@@ -1,17 +1,30 @@
 {
   "name": "@repo/json-diagram",
   "version": "1.0.0",
-  "description": "Minimal JSON diagram MVP app.",
+  "description": "Next.js JSON diagram workbench.",
   "main": "src/index.js",
   "private": true,
   "scripts": {
-    "dev": "node src/dev.js",
-    "build": "node src/build.js",
+    "dev": "next dev",
+    "demo": "node src/dev.js",
+    "build": "next build",
+    "start": "next start",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
     "typecheck": "node --test",
     "test": "node --test"
   },
   "dependencies": {
-    "@repo/shared": "workspace:*"
+    "@prisma/client": "^6.8.2",
+    "@repo/shared": "workspace:*",
+    "next": "^15.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tdesign-icons-react": "^0.6.4",
+    "tdesign-react": "^1.9.3"
+  },
+  "devDependencies": {
+    "prisma": "^6.8.2"
   },
   "keywords": [],
   "author": "ruiqi song",
