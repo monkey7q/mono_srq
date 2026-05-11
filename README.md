@@ -1,10 +1,10 @@
 # mono_srq
 
-个人 monorepo 仓库，当前主要项目是 `apps/json-diagram`。
+个人 monorepo 仓库，用于承载自己的多个项目。当前主要项目是 `apps/json-diagram`，后续也会继续在这个仓库中迭代，并逐步完善仓库级的 AI 友好化配置。
 
 ## 仓库定位
 
-这个仓库用于承载多个个人项目，采用 `pnpm workspace` 管理。当前已经落地的核心项目是一个面向架构图生成场景的最小 MVP：
+这个仓库采用 `pnpm workspace` 管理，当前已经落地的核心项目是一个面向架构图生成场景的最小 MVP：
 
 - 自然语言 -> Diagram JSON
 - Diagram JSON -> 固定风格的生图 Prompt
