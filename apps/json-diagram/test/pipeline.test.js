@@ -58,7 +58,7 @@ test("runPipeline returns model error when key is missing", async () => {
 
   const result = await runPipeline({
     prompt:
-      "请生成一个电商平台的分层技术架构图，包含接入层、应用层和数据层。",
+      "请生成一个科研工作的分层技术架构图，包含接入层、业务层和数据层，并在业务层体现用户管理模块、数据分析模块和计算任务模块。",
     diagramType: "layered_architecture",
     presetId: "architecture_storyboard",
   });
