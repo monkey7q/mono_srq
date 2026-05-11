@@ -1,6 +1,43 @@
 # mono_srq
 
 个人 monorepo 仓库，用于承载自己的多个项目。当前主要项目是 `apps/json-diagram`，后续也会继续在这个仓库中迭代，并逐步完善仓库级的 AI 友好化配置。
+## 当前项目快速开始
+
+  ### 1. 克隆仓库                                                                                                              
+                                                                                                                               
+  ```bash                                                                                                                      
+  git clone <你的仓库地址>                                                                                                     
+  cd mono_srq                                                                                                                  
+                                                                                                                               
+  ### 2. 安装依赖                                                                                                              
+                                                                                                                               
+  pnpm install                                                                                                                 
+                                                                                                                               
+  ### 3. 配置环境变量                                                                                                          
+                                                                                                                               
+  将下面这个文件：                                                                                                             
+                                                                                                                               
+  apps/json-diagram/.env.example                                                                                               
+                                                                                                                               
+  重命名为：                                                                                                                   
+                                                                                                                               
+  apps/json-diagram/.env.local                                                                                                 
+                                                                                                                               
+  然后打开 apps/json-diagram/.env.local，把里面的占位内容替换成你自己的 DeepSeek API Key：                                     
+                                                                                                                               
+  DEEPSEEK_API_KEY=你的 DeepSeek API Key                                                                                       
+  DEEPSEEK_MODEL=deepseek-v4-flash                                                                                             
+  DEEPSEEK_BASE_URL=https://api.deepseek.com                                                                                   
+                                                                                                                               
+  ### 4. 启动项目                                                                                                              
+                                                                                                                               
+  pnpm dev                                                                                                                     
+                                                                                                                               
+  ### 5. 打开页面                                                                                                              
+                                                                                                                               
+  浏览器访问：                                                                                                                 
+                                                                                                                               
+  http://localhost:xxxx   
 
 ## 仓库定位
 
