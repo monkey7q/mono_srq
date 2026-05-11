@@ -109,6 +109,7 @@ export default function WorkbenchPage() {
   const [submitting, setSubmitting] = useState(false);
   const [regenerating, setRegenerating] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [copyingPrompt, setCopyingPrompt] = useState(false);
   const [diagramText, setDiagramText] = useState(initialResultText);
   const [generationPrompt, setGenerationPrompt] = useState(initialResultText);
   const [historyList, setHistoryList] = useState([]);
@@ -389,6 +390,29 @@ export default function WorkbenchPage() {
       setIssues([error.message]);
     } finally {
       setSaving(false);
+    }
+  }
+
+  async function handleCopyPrompt() {
+    if (!generationPrompt || generationPrompt === initialResultText) {
+      return;
+    }
+
+    try {
+      setCopyingPrompt(true);
+      await navigator.clipboard.writeText(generationPrompt);
+      setStatus({
+        kind: "success",
+        text: "Prompt 已复制",
+      });
+    } catch (error) {
+      setStatus({
+        kind: "error",
+        text: "复制失败",
+      });
+      setIssues([error.message || "Failed to copy prompt."]);
+    } finally {
+      setCopyingPrompt(false);
     }
   }
 
@@ -700,6 +724,17 @@ export default function WorkbenchPage() {
                 subtitle="当前与 Diagram JSON 对应的最终生成指令"
                 icon={<ChartBubbleIcon />}
               >
+                <div style={{ marginBottom: 12 }}>
+                  <Button
+                    size="small"
+                    variant="outline"
+                    loading={copyingPrompt}
+                    icon={<FileCopyIcon />}
+                    onClick={handleCopyPrompt}
+                  >
+                    复制 Prompt
+                  </Button>
+                </div>
                 <pre className="result-card__body">{generationPrompt}</pre>
               </ResultCard>
             </div>
