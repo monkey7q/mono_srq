@@ -1,6 +1,6 @@
 "use strict";
 
-const { normalizeText } = require("@repo/shared");
+const { DEFAULT_PRESET_ID, normalizeText } = require("@repo/shared");
 const { loadLocalEnv } = require("./env");
 
 const DEFAULT_BASE_URL = "https://api.deepseek.com";
@@ -70,7 +70,7 @@ function buildJsonShapeExample(input) {
         },
       ],
       style: {
-        preset: input.presetId,
+        preset: input.presetId || DEFAULT_PRESET_ID,
         layout: "top_to_bottom",
         lineStyle: "straight",
         nodeShape: "rounded_rect",
@@ -92,7 +92,7 @@ function buildMessages(input) {
     {
       role: "system",
       content: [
-        "You are a JSON generator for architecture diagrams.",
+        "You are a JSON generator for layered architecture diagrams.",
         "Your output must be exactly one valid JSON object.",
         "Do not output markdown fences.",
         "Do not output any explanation before or after the JSON.",
@@ -106,9 +106,10 @@ function buildMessages(input) {
         "style must include: preset, layout, lineStyle, nodeShape.",
         "constraints must include: preserveExactNodeText, preserveLayerCount, noExtraNodes, noExtraRelations.",
         `meta.diagramType must equal "${input.diagramType}".`,
-        `style.preset must equal "${input.presetId}".`,
+        `style.preset must equal "${input.presetId || DEFAULT_PRESET_ID}".`,
         "Every id must be snake_case and unique.",
         "Do not add modules that are not implied by the user requirement.",
+        "Prefer clean layer-level structure over dense node-to-node complexity.",
         "If the requirement is incomplete, still output a valid JSON object with your best conservative structure.",
         "Use the following JSON shape as the required output format:",
         buildJsonShapeExample(input),
@@ -135,7 +136,7 @@ function buildRepairMessages(input, rawOutput) {
         "Do not output markdown fences.",
         "Do not output explanations.",
         `meta.diagramType must equal "${input.diagramType}".`,
-        `style.preset must equal "${input.presetId}".`,
+        `style.preset must equal "${input.presetId || DEFAULT_PRESET_ID}".`,
         "The top-level keys must be exactly: meta, structure, relations, style, constraints.",
         "If information is missing, preserve what is present and fill conservative defaults.",
         "Here is the required output shape:",

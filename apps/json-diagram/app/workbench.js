@@ -98,7 +98,7 @@ export default function WorkbenchPage() {
   const [formData, setFormData] = useState({
     prompt: samplePrompt,
     diagramType: "layered_architecture",
-    presetId: "enterprise_blueprint",
+    presetId: "architecture_storyboard",
   });
   const [status, setStatus] = useState({
     kind: "idle",
@@ -134,7 +134,7 @@ export default function WorkbenchPage() {
         }
 
         const loadedPresets = payload.presets || [];
-        const firstPreset = loadedPresets[0]?.id || "enterprise_blueprint";
+        const firstPreset = loadedPresets[0]?.id || "architecture_storyboard";
 
         setPresets(loadedPresets);
         setFormData((current) => ({
@@ -481,7 +481,7 @@ export default function WorkbenchPage() {
           <div className="sidebar-meta-card__block">
             <span className="sidebar-meta-card__label">Preset</span>
             <span className="sidebar-meta-card__subvalue">
-              {formData.presetId || "enterprise_blueprint"}
+              {formData.presetId || "architecture_storyboard"}
             </span>
           </div>
         </Card>

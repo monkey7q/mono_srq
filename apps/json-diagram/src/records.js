@@ -1,6 +1,6 @@
 "use strict";
 
-const { normalizeText } = require("@repo/shared");
+const { DEFAULT_PRESET_ID, normalizeText } = require("@repo/shared");
 const { prisma } = require("./db");
 
 function buildRecordTitle(inputPrompt, fallbackTitle) {
@@ -50,7 +50,7 @@ function buildPersistencePayload(input) {
     title: buildRecordTitle(input.inputPrompt, input.title),
     inputPrompt: normalizeText(input.inputPrompt),
     diagramType: normalizeText(input.diagramType) || "layered_architecture",
-    presetId: normalizeText(input.presetId) || "enterprise_blueprint",
+    presetId: normalizeText(input.presetId) || DEFAULT_PRESET_ID,
     provider: normalizeText(input.provider) || "deepseek",
     diagramJson: String(input.diagramJson || ""),
     generationPrompt: String(input.generationPrompt || ""),

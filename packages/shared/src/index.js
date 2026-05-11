@@ -1,37 +1,44 @@
 "use strict";
 
-//定义枚举值约束
 const DIAGRAM_TYPES = ["layered_architecture"];
 const LAYOUTS = ["top_to_bottom", "left_to_right"];
 const LINE_STYLES = ["straight", "orthogonal"];
 const NODE_SHAPES = ["rounded_rect", "rect"];
-//定义预设风格
+
+const DEFAULT_PRESET_ID = "architecture_storyboard";
+
 const PRESETS = {
-  enterprise_blueprint: {
-    id: "enterprise_blueprint",
-    label: "Enterprise Blueprint",
+  architecture_storyboard: {
+    id: "architecture_storyboard",
+    label: "Architecture Storyboard",
     layout: "top_to_bottom",
     lineStyle: "straight",
     nodeShape: "rounded_rect",
-    palette: ["#1d4ed8", "#dbeafe", "#0f172a"],
+    palette: {
+      background: "#ffffff",
+      title: "#0f172a",
+      text: "#334155",
+      layerBands: ["#2f855a", "#2b6cb0", "#6b46c1", "#c05621"],
+      border: "#cbd5e1",
+    },
     promptKeywords: [
-      "enterprise architecture diagram",
-      "clean blueprint layout",
-      "clear layer separation",
+      "clean architecture storyboard infographic",
+      "white canvas with rounded sectional bands",
+      "soft scientific presentation style",
+      "minimal outline icons and thin strokes",
+      "clear top-to-bottom narrative flow",
     ],
-  },
-  minimal_wireframe: {
-    id: "minimal_wireframe",
-    label: "Minimal Wireframe",
-    layout: "top_to_bottom",
-    lineStyle: "orthogonal",
-    nodeShape: "rect",
-    palette: ["#111827", "#f3f4f6", "#9ca3af"],
-    promptKeywords: [
-      "minimal wireframe diagram",
-      "low decoration",
-      "high readability",
-    ],
+    visualRules: {
+      canvas: "bright white background with generous whitespace",
+      layout:
+        "stack layers vertically as large rounded horizontal bands with one band per layer",
+      cards:
+        "inside each layer, place nodes in tidy white cards with thin colored borders and soft shadows",
+      iconography:
+        "use simple outline icons, restrained decoration, and presentation-grade typography",
+      arrows:
+        "use sparse downward connectors and only show dependencies between layers",
+    },
   },
 };
 
@@ -56,13 +63,13 @@ function getPreset(presetId) {
 function listPresets() {
   return Object.values(PRESETS);
 }
-//输入校验
+
 function validatePromptInput(input) {
   const prompt = normalizeText(input && input.prompt);
   const diagramType =
     normalizeText(input && input.diagramType) || "layered_architecture";
   const presetId =
-    normalizeText(input && input.presetId) || "enterprise_blueprint";
+    normalizeText(input && input.presetId) || DEFAULT_PRESET_ID;
   const issues = [];
 
   if (!prompt) {
@@ -161,7 +168,7 @@ function dedupeById(items, errors, label) {
 
   return result;
 }
-//规范化以及校验
+
 function normalizeDiagram(input) {
   const errors = [];
   const meta = input && typeof input.meta === "object" ? input.meta : {};
@@ -174,7 +181,7 @@ function normalizeDiagram(input) {
   const diagramType = normalizeText(meta.diagramType) || "layered_architecture";
   ensureEnum(diagramType, DIAGRAM_TYPES, "meta.diagramType", errors);
 
-  const presetId = normalizeText(style.preset) || "enterprise_blueprint";
+  const presetId = normalizeText(style.preset) || DEFAULT_PRESET_ID;
   const preset = getPreset(presetId);
   if (!preset) {
     errors.push(`style.preset "${presetId}" is not supported.`);
@@ -276,6 +283,7 @@ function parseDiagram(input) {
 }
 
 module.exports = {
+  DEFAULT_PRESET_ID,
   DIAGRAM_TYPES,
   PRESETS,
   createValidationError,
