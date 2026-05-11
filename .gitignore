@@ -1,0 +1,11 @@
+node_modules
+.pnpm-store
+dist                                                        
+.next                                                       
+coverage                                                    
+.env                                                        
+.env.*   
+!.env.example
+!apps/json-diagram/.env.example
+apps/json-diagram/prisma/*.db
+apps/json-diagram/prisma/*.db-journal

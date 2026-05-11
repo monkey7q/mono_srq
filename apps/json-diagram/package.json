@@ -1,0 +1,33 @@
+{
+  "name": "@repo/json-diagram",
+  "version": "1.0.0",
+  "description": "Next.js JSON diagram workbench.",
+  "main": "src/index.js",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "demo": "node src/dev.js",
+    "build": "next build",
+    "start": "next start",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "typecheck": "node --test",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.8.2",
+    "@repo/shared": "workspace:*",
+    "next": "^15.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tdesign-icons-react": "^0.6.4",
+    "tdesign-react": "^1.9.3"
+  },
+  "devDependencies": {
+    "prisma": "^6.8.2"
+  },
+  "keywords": [],
+  "author": "ruiqi song",
+  "license": "ISC",
+  "packageManager": "pnpm@10.23.0"
+}
